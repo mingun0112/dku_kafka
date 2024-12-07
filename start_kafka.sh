@@ -1,13 +1,20 @@
-sudo apt update
+sudo apt update -y
 sudo apt install openjdk-11-jdk
+echo "Updating system packages..."
 
-cd dku_kafka
+echo "Installing Python and pip..."
+sudo apt install python3 python3-pip -y
 
-# curl -O https://dlcdn.apache.org/kafka/3.9.0/kafka_2.13-3.9.0.tgz
 
-# tar -xvzf kafka_2.13-3.9.0.tgz
 
-# cd kafka_2.13-3.9.0
+pip3 install -r requirements.txt
+#cd dku_kafka
+
+curl -O https://dlcdn.apache.org/kafka/3.9.0/kafka_2.13-3.9.0.tgz
+
+tar -xvzf kafka_2.13-3.9.0.tgz
+
+cd kafka_2.13-3.9.0
 
 tmux new-session -d -s kafka-server  
 tmux new-session -d -s zookeeper    
@@ -22,7 +29,9 @@ tmux send-keys -t kafka-server "bin/kafka-server-start.sh config/server.properti
 # cd kafka_2.13-3.9.0
 
 # bin/kafka-topics.sh --create --topic quickstart-events --bootstrap-server localhost:9092
-tmux new-session -d -s mysession 
+cd ..
+
+tmux new-session -d -s kafka 
 
 tmux split-window -h
 tmux select-pane -t 0
@@ -45,4 +54,4 @@ tmux send-keys "python3 producer_1.py" C-m
 tmux select-pane -t 1
 tmux send-keys "python3 producer_2.py" C-m
 
-tmux attach -t mysession
+tmux attach -t kafka

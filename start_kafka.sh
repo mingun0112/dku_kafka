@@ -16,6 +16,8 @@ tar -xvzf kafka_2.13-3.9.0.tgz
 
 cd kafka_2.13-3.9.0
 
+echo "kafka 실행중"
+
 tmux new-session -d -s kafka-server  
 tmux new-session -d -s zookeeper    
 
@@ -24,6 +26,7 @@ tmux send-keys -t zookeeper "bin/zookeeper-server-start.sh config/zookeeper.prop
 
 tmux send-keys -t kafka-server "cd ./dku_kafka/kafka_2.13-3.9.0" C-m
 tmux send-keys -t kafka-server "bin/kafka-server-start.sh config/server.properties" C-m
+sleep 5
 
 # cd ./dku_kafka
 # cd kafka_2.13-3.9.0

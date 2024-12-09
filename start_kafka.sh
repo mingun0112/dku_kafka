@@ -1,7 +1,7 @@
 sudo apt update -y
 sudo apt install openjdk-11-jdk
 echo "Updating system packages..."
-
+sudo apt install tmux
 echo "Installing Python and pip..."
 sudo apt install python3 python3-pip -y
 
